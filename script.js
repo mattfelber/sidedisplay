@@ -345,6 +345,113 @@ function updateInspiration() {
     }, 500);
 }
 
+// Heart animation
+const heartButton = document.getElementById('heart-button');
+const heartOverlay = document.getElementById('heart-overlay');
+let heartTimeout;
+
+function hideHeartOverlay() {
+    heartOverlay.classList.remove('show');
+    clearTimeout(heartTimeout);
+}
+
+heartButton.addEventListener('click', () => {
+    heartOverlay.classList.add('show');
+    clearTimeout(heartTimeout);
+    heartTimeout = setTimeout(hideHeartOverlay, 3000);
+});
+
+// Add click handler to hide heart overlay when clicked
+heartOverlay.addEventListener('click', hideHeartOverlay);
+
+// Clock overlay animation
+const clockOverlay = document.getElementById('clock-overlay');
+let clockInterval;
+let notificationTimeout;
+
+function updateClockHands() {
+    const now = new Date();
+    const hour = now.getHours() % 12;
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+
+    const hourHand = document.querySelector('.hour');
+    const minuteHand = document.querySelector('.minute');
+    const secondHand = document.querySelector('.second');
+
+    const hourDeg = (hour * 30) + (minute * 0.5);
+    const minuteDeg = minute * 6;
+    const secondDeg = second * 6;
+
+    hourHand.style.transform = `rotate(${hourDeg}deg)`;
+    minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
+    secondHand.style.transform = `rotate(${secondDeg}deg)`;
+}
+
+function showClockOverlay() {
+    const now = new Date();
+    const spTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+    const hours = spTime.getHours();
+    const minutes = spTime.getMinutes();
+
+    // Set appropriate message
+    const periodText = document.querySelector('.period-text');
+    if (hours === 8 && minutes === 55) {
+        periodText.textContent = "Morning Session Starting";
+    } else if (hours === 16 && minutes === 0) {
+        periodText.textContent = "Lunch Break Check-In";
+    } else if (hours === 16 && minutes === 55) {
+        periodText.textContent = "Afternoon Session";
+    } else if (hours === 18 && minutes === 55) {
+        periodText.textContent = "Session Ending";
+    }
+
+    clockOverlay.classList.add('show');
+    updateClockHands();
+    clockInterval = setInterval(updateClockHands, 1000);
+
+    // Auto-hide after 30 seconds if not clicked
+    notificationTimeout = setTimeout(hideClockOverlay, 30000);
+}
+
+function hideClockOverlay() {
+    clockOverlay.classList.remove('show');
+    clearInterval(clockInterval);
+    clearTimeout(notificationTimeout);
+}
+
+function checkTime() {
+    const now = new Date();
+    // Convert to São Paulo time
+    const spTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+    const hours = spTime.getHours();
+    const minutes = spTime.getMinutes();
+
+    // Define notification times (24-hour format)
+    const notificationTimes = [
+        { hours: 8, minutes: 55 },   // Morning Session Starting
+        { hours: 16, minutes: 0 },   // Lunch Break Check-In
+        { hours: 16, minutes: 55 },  // Afternoon Session
+        { hours: 18, minutes: 55 }   // Session Ending
+    ];
+
+    // Check if current time matches any notification time
+    const shouldNotify = notificationTimes.some(time => 
+        time.hours === hours && time.minutes === minutes
+    );
+
+    if (shouldNotify) {
+        showClockOverlay();
+    }
+}
+
+clockOverlay.addEventListener('click', hideClockOverlay);
+
+// Check time every minute
+setInterval(checkTime, 60000);
+// Initial check
+checkTime();
+
 // Theme switching
 let currentTheme = 0;
 const totalThemes = 6; // Including default theme
