@@ -24,7 +24,13 @@ const inspirationalContent = {
         "Innovative", "Visionary", "Empowered", "Limitless", "Triumphant",
         "Radiant", "Flourishing", "Tenacious", "Victorious", "Accomplished",
         "Enlightened", "Fearless", "Determined", "Passionate", "Authentic",
-        "Inspiring", "Powerful", "Confident", "Focused", "Driven"
+        "Inspiring", "Powerful", "Confident", "Focused", "Driven",
+        "Luminous", "Invincible", "Unbeatable", "Spectacular", "Glorious",
+        "Incredible", "Stellar", "Superb", "Excellent", "Magnificent",
+        "Dynamic", "Energetic", "Vibrant", "Spirited", "Enthusiastic",
+        "Resolute", "Steadfast", "Unwavering", "Dedicated", "Persevering",
+        "Optimistic", "Courageous", "Valiant", "Dauntless", "Intrepid",
+        "Resourceful", "Ingenious", "Creative", "Imaginative", "Inventive"
     ],
     stoicQuotes: [
         "The happiness of your life depends upon the quality of your thoughts. - Marcus Aurelius",
@@ -42,114 +48,21 @@ const inspirationalContent = {
         "No person has the power to have everything they want, but it is in their power not to want what they don't have. - Seneca",
         "The key is to keep company only with people who uplift you. - Epictetus",
         "Don't explain your philosophy. Embody it. - Epictetus",
-        "The more quiet and solitary, the nearer to wisdom. - Marcus Aurelius",
-        "To live a good life: We have the potential for it. If we learn to be indifferent to what makes no difference. - Marcus Aurelius",
-        "The soul becomes dyed with the color of its thoughts. - Marcus Aurelius",
-        "Time is like a river of passing events, and strong is its current. - Marcus Aurelius",
-        "Accept the things to which fate binds you, and love the people with whom fate brings you together. - Marcus Aurelius",
-        "How much time he gains who does not look to see what his neighbor says or does. - Marcus Aurelius",
-        "External things are not the problem. It's your assessment of them. Which you can erase right now. - Marcus Aurelius",
-        "If it is not right, do not do it; if it is not true, do not say it. - Marcus Aurelius",
-        "Begin each day by telling yourself: Today I shall be meeting with interference, ingratitude, insolence, disloyalty, ill-will, and selfishness. - Marcus Aurelius",
-        "The best answer to anger is silence. - Marcus Aurelius",
-        "True happiness is to enjoy the present without anxious dependence upon the future. - Seneca",
-        "Difficulties strengthen the mind, as labor does the body. - Seneca",
-        "If a man knows not which port he sails, no wind is favorable. - Seneca",
-        "While we wait for life, life passes. - Seneca",
-        "Sometimes even to live is an act of courage. - Seneca",
-        "The wise man looks at death with the same eyes he looks at life. - Marcus Aurelius",
-        "Our life is what our thoughts make it. - Marcus Aurelius",
-        "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth. - Marcus Aurelius",
-        "When you arise in the morning, think of what a precious privilege it is to be alive. - Marcus Aurelius",
+        "The obstacle in the path becomes the path. - Marcus Aurelius",
+        "The best way to avenge yourself is to not be like that. - Marcus Aurelius",
+        "Accept whatever comes to you woven in the pattern of your destiny. - Marcus Aurelius",
+        "The impediment to action advances action. What stands in the way becomes the way. - Marcus Aurelius",
+        "When you wake up in the morning, tell yourself: The people I deal with today will be meddling, ungrateful, arrogant, dishonest, jealous, and surly. - Marcus Aurelius",
         "You could leave life right now. Let that determine what you do and say and think. - Marcus Aurelius",
-        "Look well into thyself; there is a source of strength which will always spring up if thou wilt always look. - Marcus Aurelius",
-        "The art of living is more like wrestling than dancing. - Marcus Aurelius",
-        "Never let the future disturb you. You will meet it with the same weapons of reason. - Marcus Aurelius",
-        "The universe is change; our life is what our thoughts make it. - Marcus Aurelius",
-        "Do every act of your life as though it were the last act of your life. - Marcus Aurelius",
-        "The mind adapts and converts to its own purposes the obstacle to our acting. - Marcus Aurelius",
-        "Associate with people who are likely to improve you. - Seneca",
-        "As long as you live, keep learning how to live. - Seneca",
-        "Life is long if you know how to use it. - Seneca",
-        "It is not the man who has too little, but the man who craves more, that is poor. - Seneca",
-        "He who is brave is free. - Seneca",
-        "Only time can heal what reason cannot. - Seneca",
-        "The greatest obstacle to living is expectancy. - Seneca",
-        "Luck is what happens when preparation meets opportunity. - Seneca",
-        "All cruelty springs from weakness. - Seneca",
-        "First learn to be a good person, then focus on being a wise person. - Epictetus",
-        "If you want to improve, be content to be thought foolish and stupid. - Epictetus",
-        "Only the educated are free. - Epictetus",
-        "No man is free who is not master of himself. - Epictetus",
-        "Don't seek to have events happen as you wish, but wish them to happen as they do happen. - Epictetus",
-        "The key is to keep company only with people who uplift you. - Epictetus",
-        "Wealth consists not in having great possessions, but in having few wants. - Epictetus",
-        "It's not what happens to you, but how you react to it that matters. - Epictetus",
-        "Make the best use of what is in your power, and take the rest as it happens. - Epictetus",
-        "Freedom is the only worthy goal in life. - Epictetus",
-        "The first and greatest victory is to conquer yourself. - Plato",
-        "The unexamined life is not worth living. - Socrates",
-        "Know thyself. - Socrates",
-        "Strong minds discuss ideas, average minds discuss events, weak minds discuss people. - Socrates",
-        "Wonder is the beginning of wisdom. - Socrates",
-        "To find yourself, think for yourself. - Socrates",
-        "Be kind, for everyone you meet is fighting a hard battle. - Plato",
-        "Good actions give strength to ourselves and inspire good actions in others. - Plato",
-        "Wise men speak because they have something to say; fools speak because they have to say something. - Plato",
-        "Excellence is not a gift, but a skill that takes practice. - Plato",
-        "The beginning is the most important part of the work. - Plato",
-        "Never discourage anyone who continually makes progress, no matter how slow. - Plato",
-        "Opinion is the medium between knowledge and ignorance. - Plato",
-        "Life must be lived as play. - Plato",
-        "Love is a serious mental disease. - Plato",
-        "Music gives a soul to the universe, wings to the mind, flight to the imagination. - Plato",
-        "Character is destiny. - Heraclitus",
-        "No man ever steps in the same river twice. - Heraclitus",
-        "The only constant in life is change. - Heraclitus",
-        "Day by day, what you choose, what you think, and what you do is who you become. - Heraclitus",
-        "Much learning does not teach understanding. - Heraclitus",
-        "Your character is your destiny. - Heraclitus",
-        "The content of your character is your choice. - Epictetus",
-        "First say to yourself what you would be, then do what you have to do. - Epictetus",
-        "Any person capable of angering you becomes your master. - Epictetus",
-        "No great thing is created suddenly. - Epictetus",
-        "It's not what happens to you, but how you react to it that matters. - Epictetus",
-        "Circumstances don't make the man, they only reveal him to himself. - Epictetus",
-        "He who laughs at himself never runs out of things to laugh at. - Epictetus",
-        "If you want to improve, be content to be thought foolish and stupid. - Epictetus",
-        "The greater the difficulty, the more glory in surmounting it. - Epictetus",
-        "Nothing great is created suddenly, any more than a bunch of grapes or a fig. - Epictetus",
-        "Practice yourself, for heaven's sake, in little things; and thence proceed to greater. - Epictetus",
-        "There is only one way to happiness and that is to cease worrying about things which are beyond the power of our will. - Epictetus",
-        "A ship should not ride on a single anchor, nor life on a single hope. - Epictetus",
-        "Seek not the good in external things; seek it in yourselves. - Epictetus",
-        "No man is free who is not master of himself. - Epictetus",
-        "It is impossible for a man to learn what he thinks he already knows. - Epictetus",
-        "Don't explain your philosophy. Embody it. - Epictetus",
-        "The key is to keep company only with people who uplift you. - Epictetus",
-        "Man is not worried by real problems so much as by his imagined anxieties about real problems. - Epictetus",
-        "If anyone tells you that a certain person speaks ill of you, do not make excuses about what is said of you but answer, 'He was ignorant of my other faults, else he would have not mentioned these alone.' - Epictetus",
-        "The essence of philosophy is that a man should so live that his happiness shall depend as little as possible on external things. - Epictetus",
-        "Don't seek to have events happen as you wish, but wish them to happen as they do happen, and all will be well with you. - Epictetus",
-        "Wealth consists not in having great possessions, but in having few wants. - Epictetus",
-        "He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has. - Epictetus",
-        "If you would be a reader, read; if a writer, write. - Epictetus",
-        "The greater the difficulty, the more glory in surmounting it. - Epictetus",
-        "It is not death that a man should fear, but rather he should fear never beginning to live. - Marcus Aurelius",
-        "The happiness of your life depends upon the quality of your thoughts. - Marcus Aurelius",
-        "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth. - Marcus Aurelius",
-        "When you arise in the morning, think of what a precious privilege it is to be alive - to breathe, to think, to enjoy, to love. - Marcus Aurelius",
-        "Accept the things to which fate binds you, and love the people with whom fate brings you together, but do so with all your heart. - Marcus Aurelius",
+        "Reject your sense of injury and the injury itself disappears. - Marcus Aurelius",
         "The best revenge is to be unlike him who performed the injury. - Marcus Aurelius",
-        "The soul becomes dyed with the color of its thoughts. - Marcus Aurelius",
-        "Waste no more time arguing about what a good man should be. Be one. - Marcus Aurelius",
-        "Very little is needed to make a happy life; it is all within yourself, in your way of thinking. - Marcus Aurelius",
-        "The object of life is not to be on the side of the majority, but to escape finding oneself in the ranks of the insane. - Marcus Aurelius",
-        "The first rule is to keep an untroubled spirit. The second is to look things in the face and know them for what they are. - Marcus Aurelius",
-        "Look well into thyself; there is a source of strength which will always spring up if thou wilt always look. - Marcus Aurelius",
-        "The art of living is more like wrestling than dancing. - Marcus Aurelius",
-        "Never let the future disturb you. You will meet it, if you have to, with the same weapons of reason which today arm you against the present. - Marcus Aurelius",
-        "The universe is change; our life is what our thoughts make it. - Marcus Aurelius"
+        "Nothing happens to anybody which he is not fitted by nature to bear. - Marcus Aurelius",
+        "Look back over the past, with its changing empires that rose and fell, and you can foresee the future too. - Marcus Aurelius",
+        "Be tolerant with others and strict with yourself. - Marcus Aurelius",
+        "The happiness of those who want to be popular depends on others; the happiness of those who seek pleasure fluctuates with moods outside their control. - Marcus Aurelius",
+        "Choose not to be harmed — and you won't feel harmed. Don't feel harmed — and you haven't been. - Marcus Aurelius",
+        "It never ceases to amaze me: we all love ourselves more than other people, but care more about their opinion than our own. - Marcus Aurelius",
+        "Anger cannot be dishonest. - Marcus Aurelius"
     ],
     scienceFacts: [
         "Every atom in your body came from a star that exploded billions of years ago.",
@@ -272,7 +185,17 @@ const inspirationalContent = {
         "A single bolt of lightning contains enough energy to toast 100,000 slices of bread.",
         "The human body generates about 25,000 BTUs of heat per day.",
         "The average person spends about 38,000 hours eating in their lifetime.",
-        "The Earth's magnetic field reverses every 200,000 to 300,000 years."
+        "The Earth's magnetic field reverses every 200,000 to 300,000 years.",
+        "A teaspoonful of neutron star would weigh 6 billion tons.",
+        "Honeybees never sleep.",
+        "The Earth's core is as hot as the surface of the sun.",
+        "A cloud can weigh more than a million pounds.",
+        "An octopus has three hearts and nine brains.",
+        "Sharks have existed longer than trees on Earth.",
+        "Space smells like seared steak and hot metal.",
+        "The human body generates enough heat in 30 minutes to boil half a gallon of water.",
+        "A single lightning bolt can cook 100,000 pieces of toast.",
+        "The average person walks the equivalent of three times around the world in a lifetime."
     ]
 };
 
@@ -293,29 +216,6 @@ function updateTime() {
             timeElement.textContent = cityTime;
         }
     }
-}
-
-function checkAlertTime() {
-    const now = new Date();
-    const spOptions = { timeZone: 'America/Sao_Paulo', hour12: false };
-    const spTime = new Date(now.toLocaleString('en-US', spOptions));
-    const spHour = spTime.getHours();
-    const spMinute = spTime.getMinutes();
-
-    const alertTimes = [9, 16, 17, 19];
-    
-    if (alertTimes.includes(spHour) && spMinute === 0) {
-        showAlert();
-    }
-}
-
-function showAlert() {
-    const alert = document.getElementById('alert');
-    alert.classList.remove('hidden');
-    
-    setTimeout(() => {
-        alert.classList.add('hidden');
-    }, 5 * 60 * 1000); // 5 minutes
 }
 
 function updateInspiration() {
@@ -367,7 +267,6 @@ heartOverlay.addEventListener('click', hideHeartOverlay);
 // Clock overlay animation
 const clockOverlay = document.getElementById('clock-overlay');
 let clockInterval;
-let notificationTimeout;
 
 function updateClockHands() {
     const now = new Date();
@@ -409,15 +308,11 @@ function showClockOverlay() {
     clockOverlay.classList.add('show');
     updateClockHands();
     clockInterval = setInterval(updateClockHands, 1000);
-
-    // Auto-hide after 30 seconds if not clicked
-    notificationTimeout = setTimeout(hideClockOverlay, 30000);
 }
 
 function hideClockOverlay() {
     clockOverlay.classList.remove('show');
     clearInterval(clockInterval);
-    clearTimeout(notificationTimeout);
 }
 
 function checkTime() {
@@ -471,9 +366,6 @@ document.getElementById('theme-toggle').addEventListener('click', () => {
 
 // Update time every second
 setInterval(updateTime, 1000);
-
-// Check for alerts every minute
-setInterval(checkAlertTime, 60 * 1000);
 
 // Update inspiration every 20 seconds
 setInterval(updateInspiration, 20000);
