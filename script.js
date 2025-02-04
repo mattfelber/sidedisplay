@@ -7,10 +7,6 @@ const cities = {
         timezone: 'America/New_York',
         coords: { lat: 40.4406, lon: -79.9959 }
     },
-    'chicago': {
-        timezone: 'America/Chicago',
-        coords: { lat: 41.8781, lon: -87.6298 }
-    },
     'utah': {
         timezone: 'America/Denver',
         coords: { lat: 40.7608, lon: -111.8910 }
@@ -281,17 +277,21 @@ const inspirationalContent = {
 };
 
 function updateTime() {
+    const now = new Date();
+
     for (const [cityId, cityInfo] of Object.entries(cities)) {
-        const timeElement = document.querySelector(`#${cityId} .time`);
-        const now = new Date();
-        const options = {
+        const cityTime = now.toLocaleTimeString('en-US', {
             timeZone: cityInfo.timezone,
             hour: '2-digit',
             minute: '2-digit',
             second: '2-digit',
-            hour12: false
-        };
-        timeElement.textContent = now.toLocaleTimeString('en-US', options);
+            hour12: true
+        });
+        
+        const timeElement = document.querySelector(`#${cityId} .time`);
+        if (timeElement) {
+            timeElement.textContent = cityTime;
+        }
     }
 }
 
@@ -344,6 +344,23 @@ function updateInspiration() {
         content.style.opacity = '1';
     }, 500);
 }
+
+// Theme switching
+let currentTheme = 0;
+const totalThemes = 6; // Including default theme
+
+document.getElementById('theme-toggle').addEventListener('click', () => {
+    // Remove current theme class from body
+    document.body.classList.remove(`theme-${currentTheme}`);
+    
+    // Move to next theme
+    currentTheme = (currentTheme + 1) % totalThemes;
+    
+    // Add new theme class if not default theme (0)
+    if (currentTheme !== 0) {
+        document.body.classList.add(`theme-${currentTheme}`);
+    }
+});
 
 // Update time every second
 setInterval(updateTime, 1000);
