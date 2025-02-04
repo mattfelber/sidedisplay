@@ -191,7 +191,13 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.95) !important;
+    background: linear-gradient(180deg, 
+        rgba(0, 0, 0, 0.98) 0%,
+        rgba(0, 20, 40, 0.98) 100%) !important;
+    border: 8px solid #00ff00;
+    box-shadow: 
+        0 0 20px rgba(0, 255, 0, 0.5),
+        inset 0 0 20px rgba(0, 255, 0, 0.5);
     z-index: 2000;
     justify-content: center;
     align-items: center;
@@ -216,33 +222,92 @@
 }
 
 .clock-text {
-    font-size: 140px;
-    margin-bottom: 20px;
+    font-family: "Courier New", monospace;
+    font-size: 180px;
+    margin: 20px;
     font-weight: 900;
     text-transform: uppercase;
     text-align: center;
     line-height: 1.2;
+    color: #00ff00;
+    position: relative;
+    letter-spacing: 2px;
     animation: 
-        alertPulse 1.5s infinite,
-        alertColor 4s infinite;
+        nasaBlink 1s infinite,
+        nasaScan 4s linear infinite;
+}
+
+.clock-text::before {
+    content: "⚠️ ALERT ⚠️";
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 80px;
+    color: #ff0000;
+    animation: nasaWarning 0.5s infinite;
     text-shadow: 
-        0 0 20px currentColor,
-        0 0 40px currentColor,
-        0 0 60px currentColor;
+        0 0 10px #ff0000,
+        0 0 20px #ff0000,
+        0 0 30px #ff0000;
+    letter-spacing: 10px;
+    white-space: nowrap;
+    font-family: Arial, sans-serif;
 }
 
-@keyframes alertPulse {
-    0% { transform: scale(1); filter: brightness(1); }
-    50% { transform: scale(1.1); filter: brightness(1.4); }
-    100% { transform: scale(1); filter: brightness(1); }
+@keyframes nasaWarning {
+    0%, 100% { 
+        opacity: 1; 
+        transform: translateX(-50%) scale(1.1);
+    }
+    50% { 
+        opacity: 0.5; 
+        transform: translateX(-50%) scale(1);
+    }
 }
 
-@keyframes alertColor {
-    0% { color: #ff3b30; }  /* Apple Red */
-    25% { color: #ff9500; } /* Apple Orange */
-    50% { color: #ffcc00; } /* Apple Yellow */
-    75% { color: #ff2d55; } /* Apple Pink */
-    100% { color: #ff3b30; }  /* Back to Red */
+.clock-text::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        transparent 0%,
+        rgba(0, 255, 0, 0.2) 50%,
+        transparent 100%
+    );
+    animation: nasaScanline 2s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes nasaBlink {
+    0%, 100% { opacity: 1; text-shadow: 0 0 20px #00ff00; }
+    50% { opacity: 0.8; text-shadow: 0 0 40px #00ff00; }
+}
+
+@keyframes nasaScan {
+    0% { text-shadow: -2px 0 #00ff00; }
+    25% { text-shadow: -2px 0 #00ff00, 2px 2px #00ff00; }
+    50% { text-shadow: -2px 0 #00ff00, 2px -2px #00ff00; }
+    75% { text-shadow: 2px 0 #00ff00; }
+    100% { text-shadow: -2px 0 #00ff00; }
+}
+
+@keyframes nasaScanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+.period-text {
+    font-family: "Courier New", monospace;
+    font-size: 40px;
+    color: #00ff00;
+    text-shadow: 0 0 10px #00ff00;
+    animation: nasaBlink 2s infinite;
+    letter-spacing: 4px;
+    margin-top: 40px;
 }
 
 .clock-face {
@@ -298,35 +363,6 @@
     border-radius: 50%;
     background: #fff;
     transform: translate(-50%, -50%);
-}
-
-.period-text {
-    font-size: 48px;
-    color: #fff;
-    margin-top: 25px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
-    background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    padding: 10px 30px;
-    border-radius: 8px;
-    animation: glow 2s infinite;
-}
-
-@keyframes glow {
-    0% { filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.5)); }
-    50% { filter: drop-shadow(0 0 15px rgba(255, 217, 61, 0.7)); }
-    100% { filter: drop-shadow(0 0 5px rgba(255, 107, 107, 0.5)); }
-}
-
-@keyframes colorPulse {
-    0% { color: #ff3b30; }
-    33% { color: #ffcc00; }
-    66% { color: #5856d6; }
-    100% { color: #ff3b30; }
 }
 
 .overlay-content {
