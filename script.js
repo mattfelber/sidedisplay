@@ -121,52 +121,6 @@ const inspirationalContent = {
         "The shortest war in history lasted 38 minutes between Britain and Zanzibar.",
         "The average person spends 2 weeks of their lifetime waiting for traffic lights to change.",
         "The smell of freshly cut grass is actually a plant distress call.",
-        "The average person has 70,000 thoughts per day.",
-        "The world's deepest postbox is in Susami, Japan, 10 meters underwater.",
-        "The most abundant element in the universe is hydrogen, making up 75% of all matter.",
-        "A single bolt of lightning contains enough energy to toast 100,000 slices of bread.",
-        "A day on Mercury is twice as long as its year.",
-        "The human body contains enough phosphorus to make about 2,200 match heads.",
-        "Cows have best friends and get stressed when separated.",
-        "The average person blinks about 15-20 times per minute.",
-        "The Sahara Desert can experience frost and snow.",
-        "Butterflies taste with their feet.",
-        "A single human hair can hold the weight of a hanging apple.",
-        "The average person spends 6 months of their lifetime waiting for red lights to turn green.",
-        "The tongue is the strongest muscle in the human body relative to its size.",
-        "Sharks have existed longer than trees on Earth.",
-        "The moon is moving away from Earth at about 3.8 centimeters per year.",
-        "A single sneeze can travel up to 100 miles per hour.",
-        "The human skeleton renews itself completely every 10 years.",
-        "Elephants are the only mammals that can't jump.",
-        "The average cloud weighs around 1.1 million pounds.",
-        "A human's sense of smell is more sensitive than a dog's during certain times of the day.",
-        "The longest recorded echo lasted 75 seconds.",
-        "The average person spends 2 years of their life on the phone.",
-        "A single raindrop falls at an average speed of 17 miles per hour.",
-        "The Earth's core is hotter than the surface of the sun.",
-        "Honey never spoils. Archaeologists have found 3000-year-old honey still preserved.",
-        "Humans share 50% of their DNA with bananas.",
-        "The average person walks the equivalent of five times around the equator in a lifetime.",
-        "The human brain generates enough electricity to power a small light bulb.",
-        "A single lightning strike can reach temperatures of 53,000 degrees Fahrenheit.",
-        "The longest living cells in the body are in the brain.",
-        "The universe contains more stars than grains of sand on all Earth's beaches.",
-        "A day on Venus is longer than its year.",
-        "The average person produces enough saliva in their lifetime to fill two swimming pools.",
-        "The human eye can distinguish about 10 million different colors.",
-        "The speed of light is approximately 186,282 miles per second.",
-        "The average person has over 1,460 dreams a year.",
-        "The human body contains enough iron to make a 3-inch nail.",
-        "A bee must visit about 2 million flowers to make one pound of honey.",
-        "The average person spends 6 years of their life dreaming.",
-        "The Earth's atmosphere extends more than 620 miles above the surface.",
-        "A single teaspoon of a neutron star would weigh 6 billion tons.",
-        "The human brain processes images 60,000 times faster than text.",
-        "The average person walks about 65,000 miles in their lifetime.",
-        "The Milky Way galaxy is moving through space at 1.3 million miles per hour.",
-        "A single human brain generates more electrical impulses in a day than all the world's telephones combined.",
-        "The longest recorded flight of a chicken is 13 seconds.",
         "The average person has about 100,000 hairs on their head.",
         "The Earth's core temperature is about the same as the surface of the Sun.",
         "The average person spends 6 months of their lifetime waiting for red lights to turn green.",
@@ -201,21 +155,23 @@ const inspirationalContent = {
 
 function updateTime() {
     const now = new Date();
+    const clockContainers = document.querySelectorAll('.clock-container');
+    const savedSettings = JSON.parse(localStorage.getItem('clockSettings') || '{}');
 
-    for (const [cityId, cityInfo] of Object.entries(cities)) {
-        const cityTime = now.toLocaleTimeString('en-US', {
-            timeZone: cityInfo.timezone,
-            hour: '2-digit',
-            minute: '2-digit',
-            second: '2-digit',
-            hour12: true
-        });
+    clockContainers.forEach((container, index) => {
+        const timezone = savedSettings[`timezone${index + 1}`] || container.id.replace('-', '/');
+        const time = container.querySelector('.time');
         
-        const timeElement = document.querySelector(`#${cityId} .time`);
-        if (timeElement) {
-            timeElement.textContent = cityTime;
-        }
-    }
+        const options = {
+            timeZone: timezone,
+            hour: 'numeric',
+            minute: 'numeric',
+            second: 'numeric',
+            hour12: true
+        };
+        
+        time.textContent = new Date(now).toLocaleTimeString('en-US', options);
+    });
 }
 
 function updateInspiration() {
@@ -270,82 +226,87 @@ let clockInterval;
 
 function updateClockHands() {
     const now = new Date();
-    const hour = now.getHours() % 12;
-    const minute = now.getMinutes();
-    const second = now.getSeconds();
+    const spTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
+    const hours = spTime.getHours();
+    const minutes = spTime.getMinutes();
+    const seconds = spTime.getSeconds();
+
+    const hourDeg = (hours % 12 + minutes / 60) * 30;
+    const minuteDeg = minutes * 6;
+    const secondDeg = seconds * 6;
 
     const hourHand = document.querySelector('.hour');
     const minuteHand = document.querySelector('.minute');
     const secondHand = document.querySelector('.second');
-
-    const hourDeg = (hour * 30) + (minute * 0.5);
-    const minuteDeg = minute * 6;
-    const secondDeg = second * 6;
 
     hourHand.style.transform = `rotate(${hourDeg}deg)`;
     minuteHand.style.transform = `rotate(${minuteDeg}deg)`;
     secondHand.style.transform = `rotate(${secondDeg}deg)`;
 }
 
-function showClockOverlay() {
-    const now = new Date();
-    const spTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
-    const hours = spTime.getHours();
-    const minutes = spTime.getMinutes();
-
-    // Set appropriate message
-    const periodText = document.querySelector('.period-text');
-    if (hours === 8 && minutes === 55) {
-        periodText.textContent = "Morning Session Starting";
-    } else if (hours === 16 && minutes === 0) {
-        periodText.textContent = "Lunch Break Check-In";
-    } else if (hours === 16 && minutes === 55) {
-        periodText.textContent = "Afternoon Session";
-    } else if (hours === 18 && minutes === 55) {
-        periodText.textContent = "Session Ending";
-    }
-
+function showClockOverlay(message) {
+    const clockOverlay = document.getElementById('clock-overlay');
+    const clockText = clockOverlay.querySelector('.clock-text');
+    
+    // Update message
+    clockText.textContent = message;
+    
+    // Show overlay
     clockOverlay.classList.add('show');
+    
+    // Start clock animation
     updateClockHands();
     clockInterval = setInterval(updateClockHands, 1000);
+    
+    // Play notification sound
+    playNotificationSound();
 }
 
 function hideClockOverlay() {
+    const clockOverlay = document.getElementById('clock-overlay');
     clockOverlay.classList.remove('show');
     clearInterval(clockInterval);
 }
 
-function checkTime() {
+function playNotificationSound() {
+    const audio = new Audio('data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU=');
+    audio.play();
+}
+
+// Alert functionality
+function checkAlerts() {
     const now = new Date();
     // Convert to São Paulo time
     const spTime = new Date(now.toLocaleString('en-US', { timeZone: 'America/Sao_Paulo' }));
-    const hours = spTime.getHours();
-    const minutes = spTime.getMinutes();
-
-    // Define notification times (24-hour format)
-    const notificationTimes = [
-        { hours: 8, minutes: 55 },   // Morning Session Starting
-        { hours: 16, minutes: 0 },   // Lunch Break Check-In
-        { hours: 16, minutes: 55 },  // Afternoon Session
-        { hours: 18, minutes: 55 }   // Session Ending
-    ];
-
-    // Check if current time matches any notification time
-    const shouldNotify = notificationTimes.some(time => 
-        time.hours === hours && time.minutes === minutes
-    );
-
-    if (shouldNotify) {
-        showClockOverlay();
+    const currentTime = spTime.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+    
+    const savedSettings = JSON.parse(localStorage.getItem('clockSettings') || '{}');
+    
+    // Check each alert
+    for (let i = 1; i <= 4; i++) {
+        const alertTime = savedSettings[`alert${i}Time`] || defaultAlerts[i-1]?.time || '';
+        const alertEnabled = savedSettings[`alert${i}Enabled`] !== undefined ? savedSettings[`alert${i}Enabled`] : true;
+        const alertMessage = savedSettings[`alert${i}Message`] || defaultAlerts[i-1]?.message || '';
+        
+        if (alertEnabled && alertTime === currentTime && alertMessage) {
+            showClockOverlay(alertMessage);
+        }
     }
 }
 
-clockOverlay.addEventListener('click', hideClockOverlay);
+// Default alerts
+const defaultAlerts = [
+    { time: '08:55', message: 'Good morning! Starting your day soon!' },
+    { time: '09:00', message: 'Time to start the day!' },
+    { time: '12:00', message: 'Lunch break! Take care of yourself!' },
+    { time: '17:00', message: 'Great job today! Time to wrap up!' }
+];
 
-// Check time every minute
-setInterval(checkTime, 60000);
+// Check for alerts every minute
+setInterval(checkAlerts, 60000);
+
 // Initial check
-checkTime();
+checkAlerts();
 
 // Theme switching
 let currentTheme = 0;
@@ -373,3 +334,160 @@ setInterval(updateInspiration, 20000);
 // Initial updates
 updateTime();
 updateInspiration();
+
+// Settings functionality
+const settingsButton = document.getElementById('settings-button');
+const settingsModal = document.getElementById('settings-modal');
+const saveSettingsButton = document.getElementById('save-settings');
+const closeSettingsButton = document.getElementById('close-settings');
+const heartMessageInput = document.getElementById('heart-message');
+const heartText = document.querySelector('#heart-overlay .heart span');
+
+// Load saved settings from localStorage
+function loadSettings() {
+    const savedSettings = JSON.parse(localStorage.getItem('clockSettings') || '{}');
+    
+    // Load timezone settings
+    for (let i = 1; i <= 4; i++) {
+        const select = document.getElementById(`timezone${i}`);
+        const savedTimezone = savedSettings[`timezone${i}`];
+        if (savedTimezone && select) {
+            select.value = savedTimezone;
+        }
+    }
+    
+    // Load heart message
+    const savedMessage = savedSettings.heartMessage || 'DANI';
+    if (heartMessageInput) {
+        heartMessageInput.value = savedMessage;
+    }
+    if (heartText) {
+        heartText.textContent = savedMessage;
+    }
+    
+    // Load alert settings
+    for (let i = 1; i <= 4; i++) {
+        const timeInput = document.getElementById(`alert${i}-time`);
+        const messageInput = document.getElementById(`alert${i}-message`);
+        const enabledInput = document.getElementById(`alert${i}-enabled`);
+        
+        if (timeInput && messageInput && enabledInput) {
+            timeInput.value = savedSettings[`alert${i}Time`] || defaultAlerts[i-1]?.time || '';
+            messageInput.value = savedSettings[`alert${i}Message`] || defaultAlerts[i-1]?.message || '';
+            enabledInput.checked = savedSettings[`alert${i}Enabled`] !== undefined ? savedSettings[`alert${i}Enabled`] : true;
+        }
+    }
+    
+    // Update clock cities
+    updateClockCities();
+}
+
+// Save settings to localStorage
+function saveSettings() {
+    const settings = {};
+    
+    // Save timezone settings
+    for (let i = 1; i <= 4; i++) {
+        const select = document.getElementById(`timezone${i}`);
+        if (select) {
+            settings[`timezone${i}`] = select.value;
+        }
+    }
+    
+    // Save heart message
+    if (heartMessageInput) {
+        settings.heartMessage = heartMessageInput.value.substring(0, 12);
+    }
+    
+    // Save alert settings
+    for (let i = 1; i <= 4; i++) {
+        const timeInput = document.getElementById(`alert${i}-time`);
+        const messageInput = document.getElementById(`alert${i}-message`);
+        const enabledInput = document.getElementById(`alert${i}-enabled`);
+        
+        if (timeInput && messageInput && enabledInput) {
+            settings[`alert${i}Time`] = timeInput.value;
+            settings[`alert${i}Message`] = messageInput.value;
+            settings[`alert${i}Enabled`] = enabledInput.checked;
+        }
+    }
+    
+    localStorage.setItem('clockSettings', JSON.stringify(settings));
+    
+    // Update UI
+    if (heartText) {
+        heartText.textContent = settings.heartMessage;
+    }
+    updateClockCities();
+    settingsModal.classList.remove('show');
+}
+
+// Update clock cities based on settings
+function updateClockCities() {
+    const clockContainers = document.querySelectorAll('.clock-container');
+    const savedSettings = JSON.parse(localStorage.getItem('clockSettings') || '{}');
+    
+    clockContainers.forEach((container, index) => {
+        const timezone = savedSettings[`timezone${index + 1}`];
+        if (timezone) {
+            const select = document.getElementById(`timezone${index + 1}`);
+            if (select) {
+                const cityName = select.selectedOptions[0].text;
+                const cityHeading = container.querySelector('h2');
+                if (cityHeading) {
+                    cityHeading.textContent = cityName;
+                }
+                container.id = timezone.toLowerCase().replace('/', '-');
+            }
+        }
+    });
+}
+
+// Event listeners for settings
+settingsButton.addEventListener('click', () => {
+    settingsModal.classList.add('show');
+    initializeTabs();
+});
+
+closeSettingsButton.addEventListener('click', () => {
+    settingsModal.classList.remove('show');
+});
+
+saveSettingsButton.addEventListener('click', saveSettings);
+
+// Close modal when clicking outside
+settingsModal.addEventListener('click', (e) => {
+    if (e.target === settingsModal) {
+        settingsModal.classList.remove('show');
+    }
+});
+
+// Load settings on page load
+loadSettings();
+
+// Tab switching functionality
+function initializeTabs() {
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    // Set initial state
+    tabContents[0].classList.add('active');
+    tabButtons[0].classList.add('active');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const tabName = button.getAttribute('data-tab');
+            
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked button and corresponding content
+            button.classList.add('active');
+            document.querySelector(`.tab-content[data-tab="${tabName}"]`).classList.add('active');
+        });
+    });
+}
+
+// Add click event to dismiss overlay
+document.getElementById('clock-overlay').addEventListener('click', hideClockOverlay);
