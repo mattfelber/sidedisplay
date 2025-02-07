@@ -16,29 +16,29 @@ const Clock = ({ timezone }) => {
       timeZone: timezone,
       hour: 'numeric',
       minute: 'numeric',
-      second: 'numeric',
       hour12: true
     }).format(time);
   };
 
+  const formatDateForTimezone = () => {
+    return new Intl.DateTimeFormat('en-US', {
+      timeZone: timezone,
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric'
+    }).format(time);
+  };
+
+  const formatCityName = () => {
+    if (!timezone) return '';
+    return timezone.split('/').pop().replace(/_/g, ' ');
+  };
+
   return (
     <div className="clock">
-      <div className="clock-face">
-        <div className="clock-center"></div>
-        <div className="hand hour-hand" style={{
-          transform: `rotate(${(time.getHours() % 12) * 30 + time.getMinutes() / 2}deg)`
-        }}></div>
-        <div className="hand minute-hand" style={{
-          transform: `rotate(${time.getMinutes() * 6}deg)`
-        }}></div>
-        <div className="hand second-hand" style={{
-          transform: `rotate(${time.getSeconds() * 6}deg)`
-        }}></div>
-      </div>
-      <div className="clock-text">
-        <div className="time">{formatTimeForTimezone()}</div>
-        <div className="timezone">{timezone.replace('_', ' ')}</div>
-      </div>
+      <div className="time">{formatTimeForTimezone()}</div>
+      <div className="date">{formatDateForTimezone()}</div>
+      <div className="timezone">{formatCityName()}</div>
     </div>
   );
 };

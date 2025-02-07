@@ -4,8 +4,30 @@ import ThemeToggle from './components/ThemeToggle';
 import Settings from './components/Settings';
 import HeartButton from './components/HeartButton';
 import Clock from './components/Clock';
-import { cities } from './data/constants';
 import { inspirationalContent } from './data/constants';
+
+const cities = {
+  'sao-paulo': { 
+    timezone: 'America/Sao_Paulo',
+    name: 'Sao Paulo'
+  },
+  'pittsburgh': { 
+    timezone: 'America/New_York',
+    name: 'New York'
+  },
+  'london': { 
+    timezone: 'Europe/London',
+    name: 'London'
+  },
+  'lisbon': { 
+    timezone: 'Europe/Lisbon',
+    name: 'Lisbon'
+  },
+  'tokyo': { 
+    timezone: 'Asia/Tokyo',
+    name: 'Tokyo'
+  }
+};
 
 function App() {
   const [theme, setTheme] = useState('default');
@@ -21,6 +43,8 @@ function App() {
     return savedSettings ? JSON.parse(savedSettings) : {
       timezone1: cities['sao-paulo'].timezone,
       timezone2: cities['pittsburgh'].timezone,
+      timezone3: cities['london'].timezone,
+      timezone4: cities['tokyo'].timezone,
       heartMessage: 'DANI',
       alerts: []
     };
@@ -119,6 +143,8 @@ function App() {
       <div className="clocks-container">
         <Clock timezone={settings.timezone1} />
         <Clock timezone={settings.timezone2} />
+        <Clock timezone={settings.timezone3} />
+        <Clock timezone={settings.timezone4} />
       </div>
       
       {inspiration && (

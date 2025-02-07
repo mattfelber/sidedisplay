@@ -10,10 +10,13 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
     onClose();
   };
 
-  const timezoneOptions = Object.values(cities).map(city => ({
-    value: city.timezone,
-    label: city.timezone.split('/')[1].replace('_', ' ')
-  }));
+  const timezoneOptions = [
+    { value: 'America/Sao_Paulo', label: 'Sao Paulo' },
+    { value: 'America/New_York', label: 'New York' },
+    { value: 'Europe/London', label: 'London' },
+    { value: 'Europe/Lisbon', label: 'Lisbon' },
+    { value: 'Asia/Tokyo', label: 'Tokyo' }
+  ];
 
   const addAlert = () => {
     if (newAlert.time && newAlert.message) {
@@ -91,6 +94,36 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
                   onChange={(e) => setLocalSettings({
                     ...localSettings,
                     timezone2: e.target.value
+                  })}
+                >
+                  {timezoneOptions.map(({ value, label }) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="timezone-setting">
+                <label htmlFor="timezone3">Clock 3:</label>
+                <select 
+                  id="timezone3"
+                  value={localSettings.timezone3}
+                  onChange={(e) => setLocalSettings({
+                    ...localSettings,
+                    timezone3: e.target.value
+                  })}
+                >
+                  {timezoneOptions.map(({ value, label }) => (
+                    <option key={value} value={value}>{label}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="timezone-setting">
+                <label htmlFor="timezone4">Clock 4:</label>
+                <select 
+                  id="timezone4"
+                  value={localSettings.timezone4}
+                  onChange={(e) => setLocalSettings({
+                    ...localSettings,
+                    timezone4: e.target.value
                   })}
                 >
                   {timezoneOptions.map(({ value, label }) => (
