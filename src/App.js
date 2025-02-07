@@ -28,7 +28,18 @@ const cities = {
   }
 };
 
-const themes = ['default', 'nasa', 'apple', 'rolex', 'psychedelic'];
+const themes = [
+  'default',
+  'nasa',
+  'apple',
+  'rolex',
+  'psychedelic',
+  'cyberpunk',
+  'matrix',
+  'sunset',
+  'neon',
+  'underwater'
+];
 
 function App() {
   const [theme, setTheme] = useState(() => {
@@ -166,8 +177,8 @@ function App() {
       </div>
       
       {showHeartOverlay && (
-        <div className="heart-overlay">
-          <div className="heart">
+        <div className="heart-overlay" onClick={() => setShowHeartOverlay(false)}>
+          <div className="heart" onClick={(e) => e.stopPropagation()}>
             <span>{settings.heartMessage}</span>
           </div>
         </div>

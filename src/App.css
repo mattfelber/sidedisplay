@@ -103,6 +103,187 @@
   animation: psychedelicText 5s infinite linear;
 }
 
+.App.theme-cyberpunk {
+  background: linear-gradient(45deg, #000000, #240046);
+  position: relative;
+}
+
+.App.theme-cyberpunk::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 0, 0.03) 1%,
+    transparent 2%
+  );
+  pointer-events: none;
+  animation: scanline 10s linear infinite;
+}
+
+.App.theme-cyberpunk .clock {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #00ff00;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.App.theme-cyberpunk .time {
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+  position: relative;
+}
+
+.App.theme-cyberpunk .time::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 2px;
+  text-shadow: -2px 0 #ff00ff;
+  top: 0;
+  color: #00ff00;
+  overflow: hidden;
+  clip: rect(0, 900px, 0, 0);
+  animation: glitch-2 3s infinite linear alternate-reverse;
+}
+
+.App.theme-matrix {
+  background: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+.App.theme-matrix::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    rgba(0, 255, 0, 0.1) 50%,
+    rgba(0, 0, 0, 0.2) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  animation: matrix-rain 30s linear infinite;
+}
+
+.App.theme-matrix .clock {
+  background: rgba(0, 20, 0, 0.8);
+  border: 1px solid #00ff00;
+  box-shadow: 0 0 30px rgba(0, 255, 0, 0.2);
+}
+
+.App.theme-matrix .time {
+  font-family: 'Courier New', monospace;
+  color: #00ff00;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.7);
+  animation: matrix-glow 2s ease-in-out infinite alternate;
+}
+
+.App.theme-sunset {
+  background: linear-gradient(45deg, #FF512F, #DD2476, #FF512F);
+  background-size: 200% 200%;
+  animation: sunset-shift 20s ease infinite;
+}
+
+.App.theme-sunset .clock {
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px rgba(255, 81, 47, 0.3);
+}
+
+.App.theme-sunset .time {
+  background: linear-gradient(45deg, #FFF, #FFD700);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+}
+
+.App.theme-neon {
+  background: #000000;
+  position: relative;
+  overflow: hidden;
+}
+
+.App.theme-neon::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(255, 0, 255, 0.1),
+    rgba(0, 255, 255, 0.1),
+    transparent 60%);
+  animation: neon-pulse 4s ease-in-out infinite;
+}
+
+.App.theme-neon .clock {
+  background: rgba(0, 0, 0, 0.8);
+  border: 2px solid #ff00ff;
+  box-shadow: 
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff,
+    inset 0 0 20px rgba(255, 0, 255, 0.5);
+}
+
+.App.theme-neon .time {
+  color: #fff;
+  text-shadow:
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px #ff00ff,
+    0 0 82px #ff00ff,
+    0 0 92px #ff00ff;
+  animation: neon-flicker 3s infinite;
+}
+
+.App.theme-underwater {
+  background: linear-gradient(45deg, #006994, #003366);
+  position: relative;
+  overflow: hidden;
+}
+
+.App.theme-underwater::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 50% 50%, 
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 50%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='2' fill='rgba(255,255,255,0.1)'/%3E%3C/svg%3E");
+  background-size: 100% 100%, 50px 50px;
+  animation: bubble-rise 20s linear infinite;
+  pointer-events: none;
+}
+
+.App.theme-underwater .clock {
+  background: rgba(0, 105, 148, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 105, 148, 0.4);
+}
+
+.App.theme-underwater .time {
+  color: #fff;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  animation: water-flow 3s ease-in-out infinite;
+}
+
 @keyframes psychedelicBg {
   0% { filter: hue-rotate(0deg); }
   100% { filter: hue-rotate(360deg); }
@@ -111,6 +292,68 @@
 @keyframes psychedelicText {
   0% { background-position: 0% 0%; }
   100% { background-position: 200% 200%; }
+}
+
+@keyframes scanline {
+  0% { background-position: 0 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glitch-2 {
+  0% { clip: rect(44px, 450px, 56px, 0); }
+  5% { clip: rect(9px, 450px, 89px, 0); }
+  10% { clip: rect(78px, 450px, 98px, 0); }
+  15% { clip: rect(22px, 450px, 33px, 0); }
+  20% { clip: rect(67px, 450px, 89px, 0); }
+  25% { clip: rect(0, 450px, 0, 0); }
+  100% { clip: rect(0, 450px, 0, 0); }
+}
+
+@keyframes matrix-rain {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
+}
+
+@keyframes matrix-glow {
+  from { text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00; }
+  to { text-shadow: 0 0 20px #00ff00, 0 0 30px #00ff00; }
+}
+
+@keyframes sunset-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes neon-pulse {
+  0% { opacity: 0.5; }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px #ff00ff,
+      0 0 82px #ff00ff,
+      0 0 92px #ff00ff;
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+@keyframes bubble-rise {
+  from { background-position: 0 100%, 0 0; }
+  to { background-position: 0 0%, 0 100%; }
+}
+
+@keyframes water-flow {
+  0%, 100% { transform: translateY(-2px); }
+  50% { transform: translateY(2px); }
 }
 
 .top-buttons {
@@ -608,10 +851,11 @@
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.8);
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
+  z-index: 1000;
+  cursor: pointer;
 }
 
 .heart-overlay.show {
@@ -620,10 +864,12 @@
 }
 
 .heart {
-  font-size: 200px;
+  font-size: 15vh;
   color: #ff4d4d;
   position: relative;
-  animation: heartBeat 1.5s infinite;
+  animation: heartbeat 1.5s ease-in-out infinite;
+  cursor: default;
+  text-align: center;
 }
 
 .heart span {
@@ -631,31 +877,13 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 24px;
+  font-size: 3vh;
   color: white;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
 }
 
-.inspiration-container {
-  width: 100%;
-  max-width: 800px;
-  margin: 20px auto;
-  text-align: center;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  box-shadow: 0 0 20px var(--shadow-color);
-}
-
-.inspiration {
-  font-size: 1.2em;
-  color: var(--text-primary);
-  line-height: 1.5;
-  font-style: italic;
-  padding: 10px;
-}
-
-@keyframes heartBeat {
+@keyframes heartbeat {
   0% { transform: scale(1); }
   14% { transform: scale(1.3); }
   28% { transform: scale(1); }
