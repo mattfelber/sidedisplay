@@ -220,8 +220,8 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
         </div>
 
         <div className="settings-buttons">
-          <button className="settings-button-secondary" onClick={onClose}>Cancel</button>
           <button className="settings-button-primary" onClick={handleSave}>Save</button>
+          <button className="settings-button-secondary" onClick={onClose}>Cancel</button>
         </div>
       </div>
     </div>
