@@ -20,13 +20,171 @@
 }
 
 .App {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
+  min-height: 100vh;
   color: var(--text-primary);
+  overflow-x: hidden;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
+}
+
+/* Theme styles */
+.App.theme-default {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+}
+
+.App.theme-nasa {
+  background: linear-gradient(135deg, #0B3D91 0%, #1E2761 100%);
+}
+
+.App.theme-nasa .clock {
+  background: rgba(11, 61, 145, 0.8);
+  border: 2px solid #FC3D21;
+  box-shadow: 0 8px 32px rgba(252, 61, 33, 0.2);
+}
+
+.App.theme-nasa .time {
+  background: linear-gradient(135deg, #ffffff 0%, #FC3D21 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.App.theme-apple {
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+}
+
+.App.theme-apple .clock {
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.1);
+}
+
+.App.theme-apple .time {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #ffffff 0%, #cccccc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.App.theme-rolex {
+  background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+  color: #DAA520;
+}
+
+.App.theme-rolex .clock {
+  background: rgba(0, 0, 0, 0.9);
+  border: 2px solid #DAA520;
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.3);
+}
+
+.App.theme-rolex .time {
+  background: linear-gradient(135deg, #DAA520 0%, #FFD700 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.App.theme-psychedelic {
+  background: linear-gradient(135deg, #FF1493 0%, #4B0082 100%);
+  animation: psychedelicBg 20s infinite linear;
+}
+
+.App.theme-psychedelic .clock {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
+}
+
+.App.theme-psychedelic .time {
+  background: linear-gradient(135deg, #FF1493 0%, #4B0082 50%, #FF1493 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: psychedelicText 5s infinite linear;
+}
+
+@keyframes psychedelicBg {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes psychedelicText {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 200%; }
+}
+
+.top-buttons {
+  position: fixed;
+  top: 2vh;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2vh;
+}
+
+.theme-toggle,
+.settings-toggle,
+.heart-button {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 50%;
+  width: 5vh;
+  height: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  line-height: 1;
+  z-index: 1000;
+}
+
+.heart-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.theme-toggle {
+  font-size: 1.8rem;
+}
+
+.theme-toggle {
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 100;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.2) rotate(15deg);
+  text-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle:hover,
+.settings-toggle:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.heart-button:hover {
+  transform: translateX(-50%) scale(1.1);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .clocks-container {
@@ -36,95 +194,92 @@
   padding: 2vh;
   max-width: 100%;
   margin: 0 auto;
+  min-height: 100vh;
 }
 
 .clock {
-  background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
   border-radius: 20px;
-  padding: 2vh;
+  padding: 20px;
   text-align: center;
-  border: 1px solid var(--border-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-width: 300px;
-  flex: 1;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.clock::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 100%
+  );
+  animation: shine 8s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes shine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .clock:hover {
-  transform: scale(1.02);
+  transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-.clock .time {
-  font-size: 3.5rem;
-  font-weight: 500;
-  color: var(--text-primary);
-  margin: 1vh 0;
-  line-height: 1;
+.time {
+  font-size: 2.5em;
+  font-weight: 700;
+  margin-bottom: 10px;
+  background: linear-gradient(135deg, #fff 0%, #a8a8a8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.clock .timezone {
-  font-size: 2.5rem;
-  color: var(--text-secondary);
-  margin: 1vh 0;
-  line-height: 1;
+.date {
+  font-size: 1em;
+  opacity: 0.8;
+  margin-bottom: 5px;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
-.clock .date {
-  font-size: 1.8rem;
-  color: var(--text-secondary);
-  margin: 1vh 0;
-  line-height: 1;
+.timezone {
+  font-size: 0.9em;
+  opacity: 0.6;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .inspirational-box {
   grid-column: span 2;
-  margin-top: 4vh;
-  min-height: 30vh;
+  min-height: 45vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6vh;
+  padding: 4vh;
 }
 
 .inspirational-box .message {
   font-size: 3.5rem;
   font-weight: 500;
   color: var(--text-accent);
-  margin: 0;
+  margin: 2vh 0;
   line-height: 1.4;
   letter-spacing: -0.02em;
 }
-
-.theme-toggle,
-.settings-button,
-.heart-button {
-  position: fixed;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--text-primary);
-  cursor: pointer;
-  font-size: 1.2em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s;
-}
-
-.theme-toggle:hover,
-.settings-button:hover,
-.heart-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-.theme-toggle { top: 20px; right: 20px; }
-.settings-button { top: 20px; right: 70px; }
-.heart-button { top: 20px; right: 120px; }
 
 .settings-modal {
   position: fixed;
@@ -176,7 +331,7 @@
 
 .settings-tabs {
   display: flex;
-  gap: 1vh;
+  gap: 2vh;
   padding: 0 2vh;
 }
 
@@ -350,7 +505,7 @@
 .clock-settings {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1vh;
+  gap: 2vh;
 }
 
 .timezone-setting {
@@ -517,20 +672,20 @@
 .alerts-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 2vh;
   width: 100%;
 }
 
 .new-alert {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 2vh;
+  margin-bottom: 2vh;
   width: 100%;
 }
 
 .new-alert input[type="time"],
 .new-alert input[type="text"] {
-  padding: 8px;
+  padding: 1vh;
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 5px;
@@ -544,7 +699,7 @@
 }
 
 .add-alert-btn {
-  padding: 8px 16px;
+  padding: 1vh 2vh;
   background: var(--text-accent);
   color: var(--bg-gradient-1);
   border: none;
@@ -562,15 +717,15 @@
 .alerts-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 2vh;
   width: 100%;
 }
 
 .alert-item {
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 15px;
+  gap: 2vh;
+  padding: 2vh;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   transition: all 0.3s;
@@ -614,7 +769,7 @@
   cursor: pointer;
   opacity: 0.6;
   transition: all 0.3s;
-  padding: 5px 10px;
+  padding: 0.5vh;
   border-radius: 50%;
 }
 
@@ -629,8 +784,8 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.85);
   display: flex;
   justify-content: center;
@@ -642,7 +797,7 @@
 
 .alert-content {
   background: linear-gradient(135deg, var(--bg-gradient-1), var(--bg-gradient-2));
-  padding: 40px;
+  padding: 4vh;
   border-radius: 20px;
   box-shadow: 
     0 0 50px rgba(255, 0, 0, 0.3),
@@ -658,7 +813,7 @@
 
 .alert-icon {
   font-size: 4em;
-  margin-bottom: 20px;
+  margin-bottom: 2vh;
   animation: alertShake 0.82s cubic-bezier(.36,.07,.19,.97) infinite;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
@@ -668,13 +823,13 @@
 .alert-content .alert-message {
   font-size: 1.8em;
   color: var(--text-primary);
-  margin: 25px 0;
+  margin: 2vh 0;
   line-height: 1.4;
   text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
 }
 
 .alert-dismiss {
-  padding: 15px 30px;
+  padding: 1.5vh 3vh;
   background: var(--text-accent);
   color: var(--bg-gradient-1);
   border: none;
@@ -739,6 +894,28 @@
   }
 }
 
+/* Theme-specific button styles */
+.theme-nasa .theme-toggle {
+  text-shadow: 0 0 10px #FC3D21;
+}
+
+.theme-apple .theme-toggle {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.theme-rolex .theme-toggle {
+  text-shadow: 0 0 10px #DAA520;
+}
+
+.theme-psychedelic .theme-toggle {
+  animation: psychedelicButton 5s infinite linear;
+}
+
+@keyframes psychedelicButton {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
 /* Media query for Motorola G5 and similar devices */
 @media screen and (max-width: 1080px) and (max-height: 1920px) {
   .App {
@@ -766,14 +943,14 @@
 
   .clocks-container {
     margin-top: 8vh;
-    gap: 1vh;
+    gap: 2vh;
     flex: 1;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
     justify-content: center;
     align-items: center;
-    padding: 1vh;
+    padding: 2vh;
   }
 
   .clock {
@@ -825,7 +1002,7 @@
   @media screen and (max-height: 700px) {
     .clocks-container {
       margin-top: 6vh;
-      gap: 0.5vh;
+      gap: 1vh;
     }
 
     .clock .time {
@@ -1009,7 +1186,7 @@
 
 .settings-buttons {
   display: flex;
-  gap: 1vh;
+  gap: 2vh;
   justify-content: flex-end;
   margin-top: 2vh;
 }
@@ -1056,7 +1233,7 @@
 
 .new-alert {
   display: flex;
-  gap: 1vh;
+  gap: 2vh;
   align-items: center;
 }
 
@@ -1095,14 +1272,14 @@
 .alerts-list {
   display: flex;
   flex-direction: column;
-  gap: 1vh;
+  gap: 2vh;
 }
 
 .alert-item {
   display: flex;
   align-items: center;
-  gap: 1vh;
-  padding: 1vh;
+  gap: 2vh;
+  padding: 2vh;
   background: var(--bg-primary);
   border-radius: 8px;
   border: 1px solid var(--border-color);
@@ -1144,7 +1321,8 @@
   .clocks-container {
     grid-template-columns: 1fr;
     width: 100%;
-    padding: 1vh;
+    gap: 2vh;
+    padding: 2vh;
   }
 
   .clock {
@@ -1154,8 +1332,7 @@
 
   .inspirational-box {
     grid-column: span 1;
-    margin-top: 2vh;
-    min-height: 25vh;
+    min-height: 35vh;
     padding: 3vh;
   }
 
@@ -1170,6 +1347,10 @@
     width: 90vw;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  .inspirational-box {
+    min-height: 50vh;
   }
 
   .inspirational-box .message {

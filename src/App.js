@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import ThemeToggle from './components/ThemeToggle';
 import Settings from './components/Settings';
-import HeartButton from './components/HeartButton';
 import Clock from './components/Clock';
 import { inspirationalContent } from './data/constants';
 
@@ -29,8 +28,14 @@ const cities = {
   }
 };
 
+const themes = ['default', 'nasa', 'apple', 'rolex', 'psychedelic'];
+
 function App() {
-  const [theme, setTheme] = useState('default');
+  const [theme, setTheme] = useState(() => {
+    const savedTheme = localStorage.getItem('clockTheme');
+    return savedTheme || themes[0];
+  });
+  
   const [showSettings, setShowSettings] = useState(false);
   const [showHeartOverlay, setShowHeartOverlay] = useState(false);
   const [inspiration, setInspiration] = useState('');
@@ -49,6 +54,12 @@ function App() {
       alerts: []
     };
   });
+
+  // Save theme to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem('clockTheme', theme);
+    document.body.className = `theme-${theme}`;
+  }, [theme]);
 
   useEffect(() => {
     localStorage.setItem('clockSettings', JSON.stringify(settings));
@@ -108,10 +119,11 @@ function App() {
   };
 
   const toggleTheme = () => {
-    const themes = ['default', 'theme-1', 'theme-2', 'theme-3', 'theme-4', 'theme-5'];
     const currentIndex = themes.indexOf(theme);
     const nextIndex = (currentIndex + 1) % themes.length;
-    setTheme(themes[nextIndex]);
+    const nextTheme = themes[nextIndex];
+    setTheme(nextTheme);
+    console.log('Switching to theme:', nextTheme); // Debug log
   };
 
   const dismissAlert = () => {
@@ -124,9 +136,17 @@ function App() {
   };
 
   return (
-    <div className={`App ${theme}`}>
-      <ThemeToggle onToggle={toggleTheme} />
-      <button className="settings-button" onClick={() => setShowSettings(true)}>⚙️</button>
+    <div className={`App theme-${theme}`}>
+      <div className="top-buttons">
+        <ThemeToggle onToggle={toggleTheme} />
+        <button className="heart-button" onClick={() => setShowHeartOverlay(true)}>
+          ❤️
+        </button>
+        <button className="settings-toggle" onClick={() => setShowSettings(true)}>
+          ⚙️
+        </button>
+      </div>
+
       <Settings 
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}
@@ -134,23 +154,24 @@ function App() {
         onSave={setSettings}
         cities={cities}
       />
+
       <div className="clocks-container">
         <Clock timezone={settings.timezone1} />
         <Clock timezone={settings.timezone2} />
         <Clock timezone={settings.timezone3} />
         <Clock timezone={settings.timezone4} />
-        {inspiration && (
-          <div className="inspirational-box clock">
-            <div className="message">{inspiration}</div>
-          </div>
-        )}
+        <div className="inspirational-box clock">
+          <div className="message">{inspiration}</div>
+        </div>
       </div>
-
-      <HeartButton 
-        message={settings.heartMessage}
-        showOverlay={showHeartOverlay}
-        onToggleOverlay={setShowHeartOverlay}
-      />
+      
+      {showHeartOverlay && (
+        <div className="heart-overlay">
+          <div className="heart">
+            <span>{settings.heartMessage}</span>
+          </div>
+        </div>
+      )}
 
       {activeAlert && (
         <div className="alert-overlay">
