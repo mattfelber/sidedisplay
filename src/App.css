@@ -30,33 +30,27 @@
 }
 
 .clocks-container {
-  margin-top: 4vh;
-  gap: 2vh;
-  flex: 1;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  justify-content: center;
-  align-items: center;
-  padding: 1vh;
-  max-width: 100vw;
-  max-height: 90vh;
+  gap: 2vh;
+  padding: 2vh;
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 .clock {
+  background: linear-gradient(145deg, var(--bg-secondary), var(--bg-primary));
+  border-radius: 20px;
+  padding: 2vh;
   text-align: center;
-  padding: 1.5vh;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  background: var(--bg-secondary);
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  transition: transform 0.3s ease;
+  min-width: 300px;
+  flex: 1;
 }
 
 .clock:hover {
@@ -66,41 +60,42 @@
 .clock .time {
   font-size: 3.5rem;
   font-weight: 500;
-  line-height: 1;
-  margin: 0.5vh 0;
   color: var(--text-primary);
-}
-
-.clock .date {
-  font-size: 1.4rem;
-  margin: 0.5vh 0;
-  color: var(--text-secondary);
+  margin: 1vh 0;
+  line-height: 1;
 }
 
 .clock .timezone {
-  font-size: 3rem;
-  font-weight: 500;
-  margin: 0.5vh 0;
-  color: var(--text-accent);
-  letter-spacing: -0.02em;
+  font-size: 2.5rem;
+  color: var(--text-secondary);
+  margin: 1vh 0;
   line-height: 1;
 }
 
-.inspiration-container {
-  width: 100%;
-  text-align: center;
-  margin-top: auto;
-  padding: 2vh;
-  box-sizing: border-box;
+.clock .date {
+  font-size: 1.8rem;
+  color: var(--text-secondary);
+  margin: 1vh 0;
+  line-height: 1;
 }
 
-.inspiration {
-  font-size: 1.2rem;
-  color: var(--text-primary);
-  font-style: italic;
-  line-height: 1.4;
+.inspirational-box {
+  grid-column: span 2;
+  margin-top: 4vh;
+  min-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6vh;
+}
+
+.inspirational-box .message {
+  font-size: 3.5rem;
+  font-weight: 500;
+  color: var(--text-accent);
   margin: 0;
-  padding: 0 2vh;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
 }
 
 .theme-toggle,
@@ -217,7 +212,6 @@
 
 .tab-content {
   display: none;
-  padding: 0 2vh;
 }
 
 .tab-content.active {
@@ -1143,4 +1137,62 @@
 .remove-alert-btn:hover {
   background: rgba(255, 255, 255, 0.1);
   color: var(--text-primary);
+}
+
+/* For smaller screens */
+@media screen and (max-width: 768px) {
+  .clocks-container {
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding: 1vh;
+  }
+
+  .clock {
+    min-width: unset;
+    width: 100%;
+  }
+
+  .inspirational-box {
+    grid-column: span 1;
+    margin-top: 2vh;
+    min-height: 25vh;
+    padding: 3vh;
+  }
+
+  .inspirational-box .message {
+    font-size: 2.5rem;
+  }
+}
+
+/* For wider screens */
+@media screen and (min-width: 1200px) {
+  .clocks-container {
+    width: 90vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .inspirational-box .message {
+    font-size: 4rem;
+  }
+}
+
+/* For smaller screens */
+@media screen and (max-width: 768px) {
+  .inspirational-box {
+    grid-column: span 1;
+    min-height: 20vh;
+    padding: 2vh;
+  }
+
+  .inspirational-box .message {
+    font-size: 2rem;
+  }
+}
+
+/* For wider screens */
+@media screen and (min-width: 1200px) {
+  .inspirational-box .message {
+    font-size: 3rem;
+  }
 }

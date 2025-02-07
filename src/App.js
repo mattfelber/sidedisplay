@@ -134,24 +134,23 @@ function App() {
         onSave={setSettings}
         cities={cities}
       />
-      <HeartButton 
-        message={settings.heartMessage}
-        showOverlay={showHeartOverlay}
-        onToggleOverlay={setShowHeartOverlay}
-      />
-      
       <div className="clocks-container">
         <Clock timezone={settings.timezone1} />
         <Clock timezone={settings.timezone2} />
         <Clock timezone={settings.timezone3} />
         <Clock timezone={settings.timezone4} />
+        {inspiration && (
+          <div className="inspirational-box clock">
+            <div className="message">{inspiration}</div>
+          </div>
+        )}
       </div>
-      
-      {inspiration && (
-        <div className="inspiration-container">
-          <div className="inspiration">{inspiration}</div>
-        </div>
-      )}
+
+      <HeartButton 
+        message={settings.heartMessage}
+        showOverlay={showHeartOverlay}
+        onToggleOverlay={setShowHeartOverlay}
+      />
 
       {activeAlert && (
         <div className="alert-overlay">
