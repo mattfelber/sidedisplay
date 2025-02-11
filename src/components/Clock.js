@@ -20,15 +20,6 @@ const Clock = ({ timezone }) => {
     }).format(time);
   };
 
-  const formatDateForTimezone = () => {
-    return new Intl.DateTimeFormat('en-US', {
-      timeZone: timezone,
-      weekday: 'long',
-      month: 'long',
-      day: 'numeric'
-    }).format(time);
-  };
-
   const formatCityName = () => {
     if (!timezone) return '';
     return timezone.split('/').pop().replace(/_/g, ' ');
@@ -37,7 +28,6 @@ const Clock = ({ timezone }) => {
   return (
     <div className="clock">
       <div className="time">{formatTimeForTimezone()}</div>
-      <div className="date">{formatDateForTimezone()}</div>
       <div className="timezone">{formatCityName()}</div>
     </div>
   );

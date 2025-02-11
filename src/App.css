@@ -500,10 +500,12 @@
 }
 
 .timezone {
-  font-size: 0.9em;
-  opacity: 0.6;
+  font-size: 1.8em;
+  opacity: 0.8;
   text-transform: uppercase;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  margin-top: 5px;
 }
 
 .inspirational-box {
