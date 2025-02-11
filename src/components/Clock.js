@@ -22,6 +22,7 @@ const Clock = ({ timezone }) => {
 
   const formatCityName = () => {
     if (!timezone) return '';
+    // Convert "America/New_York" to "New York"
     return timezone.split('/').pop().replace(/_/g, ' ');
   };
 

@@ -3,30 +3,8 @@ import './App.css';
 import ThemeToggle from './components/ThemeToggle';
 import Settings from './components/Settings';
 import Clock from './components/Clock';
-import { inspirationalContent } from './data/constants';
-
-const cities = {
-  'sao-paulo': { 
-    timezone: 'America/Sao_Paulo',
-    name: 'Sao Paulo'
-  },
-  'pittsburgh': { 
-    timezone: 'America/New_York',
-    name: 'New York'
-  },
-  'london': { 
-    timezone: 'Europe/London',
-    name: 'London'
-  },
-  'lisbon': { 
-    timezone: 'Europe/Lisbon',
-    name: 'Lisbon'
-  },
-  'tokyo': { 
-    timezone: 'Asia/Tokyo',
-    name: 'Tokyo'
-  }
-};
+import { inspirationalContent } from './data/inspirational';
+import { timezoneOptions } from './data/timezones';
 
 const themes = [
   'default',
@@ -57,10 +35,10 @@ function App() {
   const [settings, setSettings] = useState(() => {
     const savedSettings = localStorage.getItem('clockSettings');
     return savedSettings ? JSON.parse(savedSettings) : {
-      timezone1: cities['sao-paulo'].timezone,
-      timezone2: cities['pittsburgh'].timezone,
-      timezone3: cities['london'].timezone,
-      timezone4: cities['tokyo'].timezone,
+      timezone1: 'America/Sao_Paulo',
+      timezone2: 'America/New_York',
+      timezone3: 'Europe/London',
+      timezone4: 'Asia/Tokyo',
       heartMessage: 'DANI',
       alerts: []
     };
@@ -163,7 +141,7 @@ function App() {
         onClose={() => setShowSettings(false)}
         settings={settings}
         onSave={setSettings}
-        cities={cities}
+        timezoneOptions={timezoneOptions}
       />
 
       <div className="clocks-container">

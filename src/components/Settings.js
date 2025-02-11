@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { timezoneOptions } from '../data/timezones';
 
 const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
   const [localSettings, setLocalSettings] = useState({
@@ -12,14 +13,6 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
     onSave(localSettings);
     onClose();
   };
-
-  const timezoneOptions = [
-    { value: 'America/Sao_Paulo', label: 'Sao Paulo' },
-    { value: 'America/New_York', label: 'New York' },
-    { value: 'Europe/London', label: 'London' },
-    { value: 'Europe/Lisbon', label: 'Lisbon' },
-    { value: 'Asia/Tokyo', label: 'Tokyo' }
-  ];
 
   const addAlert = () => {
     if (newAlert.time && newAlert.message) {
