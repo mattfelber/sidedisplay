@@ -100,7 +100,7 @@ function App() {
   }, []);
 
   const updateInspiration = () => {
-    const categories = ['positiveWords', 'stoicQuotes', 'scienceFacts', 'philosophyQuotes'];
+    const categories = ['positiveWords', 'stoicQuotes',/*'scienceFacts'*/, 'philosophyQuotes'];
     const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     const content = inspirationalContent[randomCategory];
     const randomIndex = Math.floor(Math.random() * content.length);
