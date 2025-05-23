@@ -100,7 +100,7 @@ function App() {
   }, []);
 
   const updateInspiration = () => {
-    const categories = ['positiveWords', 'stoicQuotes', 'scienceFacts'];
+    const categories = ['positiveWords', 'stoicQuotes', 'scienceFacts', 'philosophyQuotes'];
     const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     const content = inspirationalContent[randomCategory];
     const randomIndex = Math.floor(Math.random() * content.length);
@@ -128,9 +128,11 @@ function App() {
     <div className={`App theme-${theme}`}>
       <div className="top-buttons">
         <ThemeToggle onToggle={toggleTheme} />
+        {/* Heart button commented out
         <button className="heart-button" onClick={() => setShowHeartOverlay(true)}>
           ❤️
         </button>
+        */}
         <button className="settings-toggle" onClick={() => setShowSettings(true)}>
           ⚙️
         </button>
@@ -154,6 +156,7 @@ function App() {
         </div>
       </div>
       
+      {/* Heart overlay commented out
       {showHeartOverlay && (
         <div className="heart-overlay" onClick={() => setShowHeartOverlay(false)}>
           <div className="heart" onClick={(e) => e.stopPropagation()}>
@@ -161,6 +164,7 @@ function App() {
           </div>
         </div>
       )}
+      */}
 
       {activeAlert && (
         <div className="alert-overlay">

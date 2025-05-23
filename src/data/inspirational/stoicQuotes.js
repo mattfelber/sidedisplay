@@ -38,7 +38,7 @@ export const stoicQuotes = [
     "Everything we hear is an opinion, not a fact. Everything we see is a perspective, not the truth. - Marcus Aurelius",
     "Live out your life in truth and justice, tolerant of those who are neither true nor just. - Marcus Aurelius",
     "Stop letting your emotions dominate your intelligence. - Marcus Aurelius",
-    "He who has a why to live can bear almost any how. - Nietzsche (Stoic-influenced)",
+    "He who has a why to live can bear almost any how. - Nietzsche",
     "Nothing endures but change. - Heraclitus",
     "Let men see, let them know, a real man, who lives as he was meant to live. - Marcus Aurelius",
     "Do every act of your life as if it were your last. - Marcus Aurelius",
@@ -51,5 +51,5 @@ export const stoicQuotes = [
     "Be tolerant with others and strict with yourself. - Marcus Aurelius",
     "Live immediately. - Seneca",
     "The more we value things outside our control, the less control we have. - Epictetus",
-    "Self-control is strength. Right thought is mastery. Calmness is power. - James Allen (Stoic-inspired)"
+    "Self-control is strength. Right thought is mastery. Calmness is power. - James Allen"
 ];
