@@ -11,9 +11,14 @@ const Clock = ({ timezone }) => {
     return () => clearInterval(timer);
   }, []);
 
+  const getTimezoneId = () => {
+    if (!timezone) return 'America/New_York';
+    return timezone.split('|')[0];
+  };
+
   const formatTimeForTimezone = () => {
     return new Intl.DateTimeFormat('en-US', {
-      timeZone: timezone,
+      timeZone: getTimezoneId(),
       hour: 'numeric',
       minute: 'numeric',
       hour12: true
@@ -22,6 +27,9 @@ const Clock = ({ timezone }) => {
 
   const formatCityName = () => {
     if (!timezone) return '';
+    if (timezone.includes('|')) {
+      return timezone.split('|')[1];
+    }
     // Convert "America/New_York" to "New York"
     return timezone.split('/').pop().replace(/_/g, ' ');
   };

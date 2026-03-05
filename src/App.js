@@ -16,7 +16,13 @@ const themes = [
   'matrix',
   'sunset',
   'neon',
-  'underwater'
+  'underwater',
+  'frutiger-aero',
+  'daft-punk',
+  'roman-empire',
+  'military-intel',
+  'secret-agent',
+  'brazilian-tropical'
 ];
 
 function App() {
@@ -100,7 +106,8 @@ function App() {
   }, []);
 
   const updateInspiration = () => {
-    const categories = ['positiveWords', /*'stoicQuotes','scienceFacts'*/, 'philosophyQuotes'];
+    // Only using positiveWords and philosophyQuotes for now
+    const categories = ['positiveWords', 'philosophyQuotes'];
     const randomCategory = categories[Math.floor(Math.random() * categories.length)];
     const content = inspirationalContent[randomCategory];
     const randomIndex = Math.floor(Math.random() * content.length);

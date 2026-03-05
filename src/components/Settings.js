@@ -6,8 +6,40 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
     ...settings,
     alerts: settings.alerts || []  // Initialize alerts array if it doesn't exist
   });
-  const [activeTab, setActiveTab] = useState('general');
+  const [activeTab, setActiveTab] = useState('clocks');
   const [newAlert, setNewAlert] = useState({ time: '', message: '' });
+  const [dragIndex, setDragIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
+
+  const reorderAlerts = (fromIndex, toIndex) => {
+    const newAlerts = [...localSettings.alerts];
+    const [moved] = newAlerts.splice(fromIndex, 1);
+    newAlerts.splice(toIndex, 0, moved);
+    setLocalSettings({ ...localSettings, alerts: newAlerts });
+  };
+
+  const handleDragStart = (index) => {
+    setDragIndex(index);
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    setDragOverIndex(index);
+  };
+
+  const handleDrop = (e, index) => {
+    e.preventDefault();
+    if (dragIndex !== null && dragIndex !== index) {
+      reorderAlerts(dragIndex, index);
+    }
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
 
   const handleSave = () => {
     onSave(localSettings);
@@ -52,12 +84,6 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
         <div className="settings-header">
           <div className="settings-tabs">
             <button 
-              className={`settings-tab ${activeTab === 'general' ? 'active' : ''}`}
-              onClick={() => setActiveTab('general')}
-            >
-              General
-            </button>
-            <button 
               className={`settings-tab ${activeTab === 'clocks' ? 'active' : ''}`}
               onClick={() => setActiveTab('clocks')}
             >
@@ -69,28 +95,6 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
             >
               Alerts
             </button>
-          </div>
-        </div>
-
-        <div className={`tab-content ${activeTab === 'general' ? 'active' : ''}`}>
-          <div className="settings-body">
-            <div className="settings-section">
-              <h3>⚙️ General</h3>
-              <div className="settings-input-group">
-                <label className="settings-input-label">Heart Message</label>
-                <input
-                  type="text"
-                  className="settings-input"
-                  value={localSettings.heartMessage}
-                  onChange={(e) => setLocalSettings({
-                    ...localSettings,
-                    heartMessage: e.target.value
-                  })}
-                  maxLength={12}
-                  placeholder="Enter message (max 12 chars)"
-                />
-              </div>
-            </div>
           </div>
         </div>
 
@@ -187,7 +191,16 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
 
                 <div className="alerts-list">
                   {localSettings.alerts && localSettings.alerts.map((alert, index) => (
-                    <div key={index} className="alert-item">
+                    <div
+                      key={index}
+                      className={`alert-item${dragIndex === index ? ' dragging' : ''}${dragOverIndex === index ? ' drag-over' : ''}`}
+                      draggable
+                      onDragStart={() => handleDragStart(index)}
+                      onDragOver={(e) => handleDragOver(e, index)}
+                      onDrop={(e) => handleDrop(e, index)}
+                      onDragEnd={handleDragEnd}
+                    >
+                      <div className="drag-handle" title="Drag to reorder">☰</div>
                       <div className="alert-toggle">
                         <input
                           type="checkbox"

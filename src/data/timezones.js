@@ -1,8 +1,10 @@
 export const timezoneOptions = [
     // North America
     { value: 'America/New_York', label: 'New York (UTC-05:00)' },
+    { value: 'America/New_York|Pittsburgh', label: 'Pittsburgh (UTC-05:00)' },
     { value: 'America/Chicago', label: 'Chicago (UTC-06:00)' },
     { value: 'America/Denver', label: 'Denver (UTC-07:00)' },
+    { value: 'America/Denver|Utah', label: 'Utah (UTC-07:00)' },
     { value: 'America/Los_Angeles', label: 'Los Angeles (UTC-08:00)' },
     { value: 'America/Anchorage', label: 'Anchorage (UTC-09:00)' },
     { value: 'America/Toronto', label: 'Toronto (UTC-05:00)' },
