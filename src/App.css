@@ -926,7 +926,7 @@
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 1500;
 }
 
 .settings-modal.show {
@@ -944,6 +944,7 @@
   flex-direction: column;
   gap: 2vh;
   position: relative;
+  z-index: 1;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
@@ -1301,7 +1302,6 @@
   width: 100%;
 }
 
-.new-alert input[type="time"],
 .new-alert input[type="text"] {
   padding: 1vh;
   background: rgba(255, 255, 255, 0.1);
@@ -1311,7 +1311,7 @@
   font-size: 1em;
 }
 
-.new-alert input[type="text"] {
+.new-alert input[type="text"]:last-of-type {
   flex: 1;
   min-width: 200px;
 }
@@ -1895,11 +1895,11 @@
   font-size: 1rem;
 }
 
-.new-alert input[type="time"] {
-  width: 120px;
+.new-alert input[type="text"]:first-child {
+  width: 140px;
 }
 
-.new-alert input[type="text"] {
+.new-alert input[type="text"]:nth-child(2) {
   flex: 1;
 }
 

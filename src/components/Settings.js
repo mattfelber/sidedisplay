@@ -175,10 +175,12 @@ const Settings = ({ isOpen, onClose, settings, onSave, cities }) => {
               <div className="alerts-container">
                 <div className="new-alert">
                   <input
-                    type="time"
+                    type="text"
                     value={newAlert.time}
                     onChange={(e) => setNewAlert({ ...newAlert, time: e.target.value })}
-                    placeholder="Time"
+                    placeholder="HH:MM (e.g. 09:30)"
+                    pattern="[0-9]{1,2}:[0-9]{2}"
+                    maxLength={5}
                   />
                   <input
                     type="text"
